@@ -1,4 +1,4 @@
-import branding from './Data/branding.json'
+import branding from './Data/branding.json' assert { type: 'json' };
 import { test, expect } from '@playwright/test';
 
 test('should be able to create a booking', async ({ request }) => {

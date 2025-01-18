@@ -1,4 +1,4 @@
-import room from './Data/room.json'
+import room from './Data/room.json' assert { type: 'json' };
 import { test, expect } from '@playwright/test';
 
 test('should be able to create a booking', async ({ request }) => {
