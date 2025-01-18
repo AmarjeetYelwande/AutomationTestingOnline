@@ -19,7 +19,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps{
-                dir("amazon-dot-com-product-search"){                    
+                dir("automationtestingonline"){                    
                     sh 'npm ci'                                              
                     sh 'npx playwright install --with-deps'                    
                 }
@@ -29,7 +29,7 @@ pipeline {
         stage('Run Tests') {
             steps{
 
-            dir("amazon-dot-com-product-search"){
+            dir("automationtestingonline"){
                    sh 'npx playwright test'
                 }            
             }
