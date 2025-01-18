@@ -2,16 +2,24 @@
   "name": "automationtestingonline",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pwui": "npx playwright test --ui",
+    "pwtestheadless": "npx playwright test --project=chromium --workers=1 && npx playwright show-report",
+    "pwtestheaded": "npx playwright test --headed --project=chromium --workers=1 && npx playwright show-report",
+    "pwtest20": "npx playwright test --headed --project=chromium --workers=1 --repeat-each=10 && npx playwright show-report",
+    "pwcodegen": "npx playwright codegen"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.49.1",
-    "@types/node": "^22.10.7"
+    "@types/node": "^22.10.7",
+    "jest": "^29.7.0"
   },
   "dependencies": {
     "automationtestingonline": "file:"
-  }
+  },
+  "type": "module"
 }
