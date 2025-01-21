@@ -7,7 +7,12 @@
     "testheadless": "npx playwright test --project=chromium --workers=1 && npx playwright show-report",
     "testheaded": "npx playwright test --headed --project=chromium --workers=1 && npx playwright show-report",
     "test20": "npx playwright test --headed --project=chromium --workers=1 --repeat-each=10 && npx playwright show-report",
-    "codegen": "npx playwright codegen"
+    "codegen": "npx playwright codegen",
+    "test": "npx bddgen && npx playwright test",
+    "watch:bdd": "nodemon -w ./features -w ./steps -e feature,js,ts --exec \"npx bddgen\"",
+    "watch:pw": "playwright test --ui",
+    "watch": "run-p watch:*",
+    "report": "npx http-server ./cucumber-report -c-1 -o index.html"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +23,11 @@
     "@types/node": "^22.10.7",
     "ajv": "^8.17.1",
     "jest": "^29.7.0",
-    "jsonschema": "^1.5.0"
+    "jsonschema": "^1.5.0",
+    "playwright-bdd": "^8.0.1",
+    "prettier": "3.4.2",
+    "prettier-plugin-gherkin": "^3.1.1",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "automationtestingonline": "file:"
