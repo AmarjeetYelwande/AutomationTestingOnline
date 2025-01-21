@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-    await page.goto('https://automationintesting.online/');
+    await page.goto('');
     await page.getByRole('button', { name: 'Let me hack!' }).click();
     await page.getByTestId('ContactName').click();
     await page.getByTestId('ContactName').fill('Steve Smith');
