@@ -1,12 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { createRequire } from 'node:module';
-const room = createRequire(import.meta.url)("./Data/room.json");
+const schema = createRequire(import.meta.url)("./Data/schema.json");
+import { Ajv } from 'ajv';
+const ajv = new Ajv();
 
-test('should be able to create a booking', async ({ request }) => {
-    const response = await request.get("/room")
-    console.log(await response.json());
+test('Validate schema of the room', async ({ request }) => {
+    const response = await request.get("/room");
+    const responseBody = await response.json();
+    const firstElement = responseBody.rooms[0];
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
-    const responseBody = await response.json()
-    expect(JSON.stringify(responseBody)).toEqual(JSON.stringify(room))
+    const isSchemaValid = ajv.validate(schema, firstElement);
+    if (!isSchemaValid) console.log(ajv.errors);
+    expect(isSchemaValid).toBeTruthy();
 });
+
