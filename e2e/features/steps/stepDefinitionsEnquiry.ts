@@ -1,12 +1,5 @@
 import { expect } from '@playwright/test';
-import { Given, When, Then } from './fixtures';
-
-Given('I am on automationInTesting.online home page', async ({ page }) => {
-    await page.goto('');
-    // Acknowledge the configuration dialog,as we are not testing the dialog.
-    await page.getByRole('button', { name: 'Let me hack!' }).click();
-});
-
+import { When, Then } from './fixtures';
 
 When('I enter my {string} {string} {string} {string} {string} on enquiry form', async ({ page },
     Name: string, Email: string, Phone: string, Subject: string, Message: string) => {
