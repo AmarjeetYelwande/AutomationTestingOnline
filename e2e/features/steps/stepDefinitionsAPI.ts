@@ -26,10 +26,9 @@ Then('The response for rooms matches with schema specified in the json file {str
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
     responseBody = await response.json();
-    console.log(typeof responseBody);
     const firstElement = await responseBody.rooms[0];
-    console.log(firstElement);
     const isSchemaValid = ajv.validate(roomSchema, firstElement);
     if (!isSchemaValid) console.log(ajv.errors);
     expect(isSchemaValid).toBeTruthy();
+    response.close;
 }); 
