@@ -13,15 +13,17 @@ pipeline {
 
         stage("Clone Repo"){
             steps{
-                sh "git clone https://github.com/AmarjeetYelwande/AutomationTestingOnline.git"
+                // Replace bat with sh if running the Jeknins server on Linux
+                bat "git clone https://github.com/AmarjeetYelwande/AutomationTestingOnline.git"                
             }       
         }       
 
         stage('Install Dependencies') {
             steps{
-                dir("automationtestingonline"){                    
-                    sh 'npm ci'                                              
-                    sh 'npx playwright install --with-deps'                    
+                dir("automationtestingonline"){   
+                    // Replace bat with sh if running the Jeknins server on Linux                 
+                    bat 'npm ci'                                              
+                    bat 'npx playwright install --with-deps'                    
                 }
             }           
         }
@@ -30,7 +32,8 @@ pipeline {
             steps{
 
             dir("automationtestingonline"){
-                   sh 'npx playwright test'
+                // Replace bat with sh if running the Jeknins server on Linux
+                bat 'npm run test'
                 }            
             }
         }
