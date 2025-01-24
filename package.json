@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "ui": "npx playwright test --ui",
-    "testheadless": "npx playwright test --project=chromium --workers=1 && npx playwright show-report",
-    "testheaded": "npx playwright test --headed --project=chromium --workers=1 && npx playwright show-report",
-    "test20": "npx playwright test --headed --project=chromium --workers=1 --repeat-each=10 && npx playwright show-report",
+    "ui": "npx bddgen && npx playwright test --ui",
+    "bddgen": "npx bddgen",
     "codegen": "npx playwright codegen",
     "test": "npx bddgen && npx playwright test",
     "watch:bdd": "nodemon -w ./features -w ./steps -e feature,js,ts --exec \"npx bddgen\"",
