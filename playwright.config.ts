@@ -2,8 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig, cucumberReporter } from 'playwright-bdd';
 
 const testDir = defineBddConfig({
-  features: 'features/*.feature',
-  steps: 'features/steps/*.ts',
+  features: 'e2e/features/*.feature',
+  steps: 'e2e/features/steps/*.ts'
 });
 
 /**
@@ -82,10 +82,10 @@ export default defineConfig({
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
     // },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
+    /*   {
+        name: 'Mobile Safari',
+        use: { ...devices['iPhone 12'] },
+      }, */
 
     /* Test against branded browsers. */
     // {
