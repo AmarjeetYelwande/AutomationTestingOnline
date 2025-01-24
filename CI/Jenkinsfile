@@ -33,7 +33,7 @@ pipeline {
 
             dir("automationtestingonline"){
                 // Replace bat with sh if running the Jeknins on Linux
-                bat 'npx playwright test'
+                bat 'npm run test'
                 }            
             }
         }
