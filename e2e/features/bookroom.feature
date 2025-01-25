@@ -1,6 +1,7 @@
 Feature: Book room
-    Scenario: Book room with valid/invalid details
+    Background: Visit automationInTesting.online
         Given I am on automationInTesting.online home page
+    Scenario: Book room
         When I select my desired booking date
         And I enter my "<FirstName>" "<LastName>" "<Email>" "<Phone>" on booking form
         And I click submit button
@@ -17,6 +18,8 @@ Feature: Book room
             | 8  | Phone field empty  | Steve     | Smith    | steve@email.com |             | must not be empty                   |
             | 9  | Phone field wrong  | Steve     | Smith    | steve@email.com | 744         | size must be between 11 and 21      |
 
-
-
-
+    Scenario: Calender functionality for booking
+        When I click book my room button I get current month calender
+        When I click next button I get next month calender
+        When I click back button I get previous month calender
+        When I click today button I get current month calender

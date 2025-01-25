@@ -1,4 +1,5 @@
 Feature: Send enquiry about room booking
+
     Scenario Outline: Verify all Form submission fields
         Given I am on automationInTesting.online home page
         When I enter my "<Name>" "<Email>" "<Phone>" "<Subject>" "<Message>" on enquiry form
@@ -14,4 +15,4 @@ Feature: Send enquiry about room booking
             | 6  | Short subject      | Steve Smith | steve@email.com | 07440000000 | Book         | I would like to book a room | Subject must be between 5 and 100 characters.   |
             | 7  | Empty subject      | Steve Smith | steve@email.com | 07440000000 |              | I would like to book a room | Subject may not be blank                        |
             | 6  | Short message      | Steve Smith | steve@email.com | 07440000000 | Book         | I would                     | Message must be between 20 and 2000 characters. |
-            | 7  | Empty message      | Steve Smith | steve@email.com | 07440000000 |              |                             | Message may not be blank                        |
+            | 7  | Empty message      | Steve Smith | steve@email.com | 07440000000 | Room Booking |                             | Message may not be blank                        |

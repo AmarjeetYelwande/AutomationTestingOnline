@@ -1,4 +1,5 @@
 Feature: API tests for automationInTesting.online
+
     Scenario: API test for enquiry form
         When I send a GET request to "/branding" API
         Then The response I get matches with expected response specified in the json file "branding"
