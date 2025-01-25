@@ -1,8 +1,6 @@
 import { expect } from '@playwright/test';
 import { createRequire } from 'node:module';
 import { When, Then } from './fixtures';
-//const branding = createRequire(import.meta.url)("../Data/branding.json");
-//const roomSchema = createRequire(import.meta.url)("../Data/roomSchema.json");
 import { Ajv } from 'ajv';
 const ajv = new Ajv();
 let responseBody: any;
@@ -13,7 +11,7 @@ When('I send a GET request to {string} API', async ({ request }, Api_Endpoint: s
 });
 
 Then('The response I get matches with expected response specified in the json file {string}', async ({ }, json: any) => {
-    const branding = createRequire(import.meta.url)("../Data/" + json + ".json");
+    const branding = createRequire(import.meta.url)("../data/" + json + ".json");
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
     responseBody = await response.json()
@@ -22,7 +20,7 @@ Then('The response I get matches with expected response specified in the json fi
 });
 
 Then('The response for rooms matches with schema specified in the json file {string}', async ({ }, json: any) => {
-    const roomSchema = createRequire(import.meta.url)("../Data/" + json + ".json");
+    const roomSchema = createRequire(import.meta.url)("../data/" + json + ".json");
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
     responseBody = await response.json();

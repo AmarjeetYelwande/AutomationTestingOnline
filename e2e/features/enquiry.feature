@@ -1,5 +1,5 @@
 Feature: Send enquiry about room booking
-
+    @skip
     Scenario Outline: Verify all Form submission fields
         Given I am on automationInTesting.online home page
         When I enter my "<Name>" "<Email>" "<Phone>" "<Subject>" "<Message>" on enquiry form

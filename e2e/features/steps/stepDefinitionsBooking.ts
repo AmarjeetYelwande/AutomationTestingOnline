@@ -2,10 +2,22 @@ import { expect } from '@playwright/test';
 import { When, Then } from './fixtures';
 import { getDateAndYear } from '../../Utilities/getDateAndYear';
 
-When('I select my desired booking date', async ({ page },) => {
-    await page.locator("//button[normalize-space()='Book this room'][1]").first().click();
+When('I select my desired booking date todo', async ({ page },) => {
+    await page.goto('https://automationintesting.online/');
+    await page.locator('.col-sm-7 > .btn').first().click();
     await page.getByRole('button', { name: 'Next' }).click();
-    await page.locator('.rbc-row-bg > div:nth-child(7)').first().click();
+    await page.locator("(//div[@aria-label='Month View']/div[@class='rbc-month-row'])[2]/div[@class='rbc-row-bg']/div[@class='rbc-day-bg'][1]").dblclick();
+    await page.getByPlaceholder('Firstname').fill('Amarjeet');
+    await page.getByPlaceholder('Lastname').fill('Yelwade');
+    await page.locator('input[name="email"]').fill('test@nai.com');
+    await page.locator('input[name="phone"]').fill('07448302091');
+    await page.getByRole('button', { name: 'Book', exact: true }).click();
+    await page.getByText('Congratulations! Your booking').click();
+    await page.getByRole('button', { name: 'Close' }).click();
+});
+
+When('I select first room form the list of available rooms', async ({ page },) => {
+    await page.locator('.col-sm-7 > .btn').first().click();
 });
 
 When('I enter my {string} {string} {string} {string} on booking form', async ({ page },
