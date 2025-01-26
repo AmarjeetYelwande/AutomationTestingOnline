@@ -1,7 +1,7 @@
 Feature: Send enquiry about room booking
-    @skip
-    Scenario Outline: Verify all Form submission fields
+    Background: Visit automationInTesting.online home page
         Given I am on automationInTesting.online home page
+    Scenario Outline: Verify all Form submission fields
         When I enter my "<Name>" "<Email>" "<Phone>" "<Subject>" "<Message>" on enquiry form
         And I click button submit
         Then I see "<Information_Message>" on landing page
