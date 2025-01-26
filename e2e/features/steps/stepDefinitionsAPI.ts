@@ -11,6 +11,7 @@ When('I send a GET request to {string} API', async ({ request }, Api_Endpoint: s
 });
 
 Then('The response I get matches with expected response specified in the json file {string}', async ({ }, json: any) => {
+    console.log("../data/" + json + ".json");
     const branding = createRequire(import.meta.url)("../data/" + json + ".json");
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
@@ -20,6 +21,7 @@ Then('The response I get matches with expected response specified in the json fi
 });
 
 Then('The response for rooms matches with schema specified in the json file {string}', async ({ }, json: any) => {
+    console.log("../data/" + json + ".json");
     const roomSchema = createRequire(import.meta.url)("../data/" + json + ".json");
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
