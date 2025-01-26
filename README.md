@@ -19,9 +19,8 @@ Test the website AutomationTesting.online using Playwright
 ### Booking selection
 
     - Booking is allowed even if date is elapsed
-    - Irrespective of the whether booking information is correct / incorrect you get
-      a message 'must not be null' on booking landing page. So booking is never successful.    
-    - When no data is supplied in forms, you get message without mention of the specific field where validation has failed   
+    - When booking is done without selecting dates, you get message "must not be null"      
+    - When no data is supplied in forms, you get message without mention of the specific field where validation has failed.- The message is generic like the length of the string should be between 5 and 20
     
 ## Execute following commands to setup and test the project in sequence
 
