@@ -1,12 +1,12 @@
 name: Playwright Tests
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 jobs:
-  test:
-    timeout-minutes: 60
+  Playwright_Tests_for_AutomationTestingOnline:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,4 +26,4 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 1

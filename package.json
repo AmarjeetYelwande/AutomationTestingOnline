@@ -4,13 +4,8 @@
   "main": "index.js",
   "scripts": {
     "ui": "npx bddgen && npx playwright test --ui",
-    "bddgen": "npx bddgen",
     "codegen": "npx playwright codegen",
-    "test": "npx bddgen && npx playwright test",
-    "watch:bdd": "nodemon -w ./features -w ./steps -e feature,js,ts --exec \"npx bddgen\"",
-    "watch:pw": "playwright test --ui",
-    "watch": "run-p watch:*",
-    "report": "npx http-server ./cucumber-report -c-1 -o index.html"
+    "test": "npx bddgen && npx playwright test"
   },
   "keywords": [],
   "author": "",

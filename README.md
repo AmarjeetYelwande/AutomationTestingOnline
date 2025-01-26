@@ -7,21 +7,64 @@ Test the website AutomationTesting.online using Playwright
 - You are able to book room on your desired date(s)
 - You can select facilities available in a room like TV,Wifi,Safe etc.
 - If you have any questions about booking, you can send enquiry to the management.
-- You can view the location of the hotel in map.
+- You can view the location of the hotel in google map.
+  
 ## Following bugs are present in the booking application
 
-### Configuration page ( * not covered by automation tests )
+### Configuration page
 
     - You are allowed to create multiple rooms with same ID / type etc.
-    - Room iD is not unique and can contain text as ID instead of strict numbers.
+    - Room ID is not unique and can contain text / special characters of unique numbers.
 
 ### Booking selection
 
-    - Booking is allowed even if you do not select the date.
-    - Irrespective of the whether booking information is correct / incorrect you get
-      a message 'must not be null' on booking landing page. So booking is never successful.
-    - Booking is allowed for elapsed dates which is not expected.
-    - There is no way user is informed which date they have selected when submitting form.
-    - Email in wrong format is accepted. 
-    - Telephone number with characters is accepted.
-    - You can't select continuous two or more dates.
+    - Booking is allowed even if date is elapsed
+    - When booking is done without selecting dates, you get message "must not be null"      
+    - When no data is supplied in forms, you get message without mention of the specific field where validation has failed.- The message is generic like the length of the string should be between 5 and 20
+    
+## Execute following commands to setup and test the project in sequence
+
+    - npm install -g node 
+    - npm install
+    - npm install -D @playwright/test@latest
+    - npx playwright install --with-deps
+    - npx playwright --version
+    - npm run test
+    - npx playwright show-report
+  
+## Project structure tree
+
+        /
+        │   .gitignore
+        │   package-lock.json
+        │   package.json
+        │   playwright.config.ts
+        │   README.md
+        │
+        ├───.github
+        │   └───workflows
+        │           playwright.yml
+        │
+        ├───ci
+        │       Jenkinsfile
+        │
+        └───e2e
+            ├───features
+            │   │   api.feature
+            │   │   bookRoom.feature
+            │   │   enquiry.feature
+            │   │
+            │   ├───data
+            │   │       branding.json
+            │   │       roomSchema.json
+            │   │
+            │   └───steps
+            │           fixtures.ts
+            │           stepDefinitionsAPI.ts
+            │           stepDefinitionsBooking.ts
+            │           stepDefinitionsCommon.ts
+            │           stepDefinitionsEnquiry.ts
+            │
+            └───utilities
+                    getDateAndYear.ts
+        
