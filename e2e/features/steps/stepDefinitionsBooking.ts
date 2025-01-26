@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { When, Then } from './fixtures';
-import { getDateAndYearRelativeToCurrentDate } from '../../utilities/getDateAndYear';
+import { getDateAndYearRelativeToCurrentDate } from '../../utilities/getMonthAndYear';
 
 When('I select my desired {string}', async ({ page },
     Booking_Date: string) => {
