@@ -1,12 +1,12 @@
 {
     "bookingdates": {
-        "checkin": "2025-01-01",
-        "checkout": "2025-01-02"
+        "checkin": "2026-01-05",
+        "checkout": "2026-01-06"
     },
     "depositpaid": false,
-    "firstname": "Amarjeet",
-    "lastname": "Yelwande",
+    "firstname": "Steve",
+    "lastname": "Smith",
     "roomid": 1,
-    "email": "yelwande@yahoo.com",
-    "phone": "07448302090"
+    "email": "steve@email.com",
+    "phone": "07440000000"
 }

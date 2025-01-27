@@ -10,16 +10,17 @@ When('I send a GET request to {string} API', async ({ request }, Api_Endpoint: s
     response = await request.get(Api_Endpoint)
 });
 
-Then('The response I get matches with expected response specified in the json file {string}', async ({ }, json: any) => {
-    const branding = createRequire(import.meta.url)("../data/" + json + ".json");
-    expect(response.ok()).toBeTruthy();
-    expect(response.status()).toBe(200);
+Then('The response I get matches with expected response specified in the json file {string} with response code {string}', async ({ },
+    json: any, responseCode: string) => {
+    const expectedResponse = createRequire(import.meta.url)("../data/" + json + ".json");
+    expect(response.status()).toBe(parseInt(responseCode));
     responseBody = await response.json()
-    expect(JSON.stringify(responseBody)).toEqual(JSON.stringify(branding))
+    expect(JSON.stringify(responseBody)).toEqual(JSON.stringify(expectedResponse))
     response.close;
 });
 
-Then('The response for rooms matches with schema specified in the json file {string}', async ({ }, json: any) => {
+Then('The response for rooms matches with schema specified in the json file {string}', async ({ },
+    json: any) => {
     const roomSchema = createRequire(import.meta.url)("../data/" + json + ".json");
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
@@ -33,18 +34,27 @@ Then('The response for rooms matches with schema specified in the json file {str
 
 When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
     Api_Endpoint: string, json: any) => {
-    response = await request.get(Api_Endpoint)
+    const postRequestData = createRequire(import.meta.url)("../data/" + json + ".json");
+    response = await request.post(Api_Endpoint, {
+        data: postRequestData
+    });
 });
 
-
-When('The response I get matches with expected response specified in the json file {string}}', async ({ request },
-    json: any) => {
-    const expectedBookingResponse = createRequire(import.meta.url)("../data/" + json + ".json");
-    responseBody = await response.json();
-    expect(responseBody).toEqual(expectedBookingResponse);
-    expect(response.ok()).toBeTruthy();
-    expect(response.status()).toBe(201);
-    response.close;
-});
-
+//Due to some reason when request is sent from playwright error 403 is returned.
+//So using alternate approach to send request using fetch
+// When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
+//     Api_Endpoint: string, json: any) => {
+//     const endpoint = "https://automationintesting.online" + Api_Endpoint;
+//     const postRequestData = createRequire(import.meta.url)("../data/" + json + ".json");
+//     response = await fetch(endpoint, {
+//         method: "POST",
+//         body: JSON.stringify(postRequestData),
+//         headers: {
+//             "Content-type": "application/json; charset=UTF-8",
+//         },
+//     });
+//     //const data1 = await response.js
+//     // on();
+//     console.log(response.status);
+// });
 
