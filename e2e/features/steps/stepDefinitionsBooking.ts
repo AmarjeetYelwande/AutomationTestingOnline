@@ -10,12 +10,12 @@ When('I select my desired {string}', async ({ page },
         await page.getByRole('button', { name: 'Next' }).click();
         isDesiredMonth = await page.getByText(Booking_Date).isVisible();
     }
-    await page.locator("(//div[@aria-label='Month View']/div[@class='rbc-month-row'])[3]/div[@class='rbc-row-bg']/div[@class='rbc-day-bg'][3]").dblclick();
-    //await page.getByRole('button', { name: 'Close' }).click();
+    await page.dblclick('.rbc-month-view .rbc-day-bg >> nth=6');
 });
 
 When('I select first room form the list of available rooms', async ({ page },) => {
     await page.locator('.col-sm-7 > .btn').first().click();
+    await expect(page.locator('.rbc-calendar')).toBeVisible();
 });
 
 When('I enter my {string} {string} {string} {string} on booking form', async ({ page },
