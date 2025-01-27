@@ -22,7 +22,6 @@ Feature: Book room
         When I click next button I get next month calender
         When I click back button I get previous month calender
         When I click today button I get current month calender
-    @skip
     Scenario: Book room using calendar picker
         When I select my desired "<Booking_Date>"
         And I enter my "<FirstName>" "<LastName>" "<Email>" "<Phone>" on booking form
