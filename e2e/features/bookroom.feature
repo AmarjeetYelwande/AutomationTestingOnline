@@ -1,7 +1,7 @@
 Feature: Book room
     Background: Visit automationInTesting.online home page
         Given I am on automationInTesting.online home page
-    Scenario: Book room form validation
+    Scenario: 'Book room' input form validation
         When I select first room form the list of available rooms
         And I enter my "<FirstName>" "<LastName>" "<Email>" "<Phone>" on booking form
         And I click submit button
@@ -17,7 +17,7 @@ Feature: Book room
             | 7  | Wrong email format | Steve     | Smith    | @email.com      | 7440000000  | must be a well-formed email address |
             | 8  | Phone field empty  | Steve     | Smith    | steve@email.com |             | must not be empty                   |
             | 9  | Phone field wrong  | Steve     | Smith    | steve@email.com | 744         | size must be between 11 and 21      |
-    Scenario: Month functionality for booking
+    Scenario: Test back / today / next buttons on calendar picker
         When I click book my room button I get current month calender
         When I click next button I get next month calender
         When I click back button I get previous month calender

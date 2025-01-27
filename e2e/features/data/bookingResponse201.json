@@ -1,0 +1,14 @@
+{
+    "bookingid": 7,
+    "booking": {
+        "bookingid": 7,
+        "roomid": 1,
+        "firstname": "Amarjeet",
+        "lastname": "Yelwande",
+        "depositpaid": false,
+        "bookingdates": {
+            "checkin": "2024-01-01",
+            "checkout": "2024-01-02"
+        }
+    }
+}
