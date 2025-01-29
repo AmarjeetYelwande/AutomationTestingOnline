@@ -4,7 +4,12 @@ Feature: API tests for automationInTesting.online
         Then The response I get matches with expected response specified in the json file "contactDetails" with response code "200"
     Scenario: API test for getting rooms
         When I send a GET request to "/room" API
-        Then The response for rooms matches with schema specified in the json file "roomSchema"
+        Then The response for "rooms" matches with schema specified in the json file "roomSchema"
+
+    Scenario: Get booked dates for a room
+        When I send a GET request to "/report/room/1" API
+        Then The response for "report" matches with schema specified in the json file "bookedDatesSchema"
+
     @skip
     # When request is sent from playwright the postal denies it with 403 error
     # Same request sent from postman works fine. So skipping this test
