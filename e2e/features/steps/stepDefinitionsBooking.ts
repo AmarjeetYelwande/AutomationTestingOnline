@@ -16,7 +16,6 @@ When('I select my desired {string}', async ({ page },
     const dateCell = "(//div[@aria-label='Month View']/div[@class='rbc-month-row'])[3]/div[@class='rbc-row-bg']/div[@class='rbc-day-bg'][3]";
     const dateCell_row_2_to_4 = replaceCharacterInString(dateCell, 62, (Math.floor(Math.random() * 4) + 2).toString());
     const dateCell_final = replaceCharacterInString(dateCell_row_2_to_4, 115, (Math.floor(Math.random() * 7) + 1).toString());
-    console.log(dateCell_final);
     await page.locator(dateCell_final).dblclick();
 });
 
