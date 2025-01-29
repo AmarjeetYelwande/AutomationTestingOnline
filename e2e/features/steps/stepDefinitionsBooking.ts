@@ -1,16 +1,23 @@
 import { expect } from '@playwright/test';
 import { When, Then } from './fixtures';
 import { getDateAndYearRelativeToCurrentDate } from '../../utilities/getMonthAndYear';
+import { replaceCharacterInString } from '../../utilities/replaceCharacterInString';
 
 When('I select my desired {string}', async ({ page },
-    Booking_Date: string) => {
+    Booking_Month: string) => {
     await page.locator('.col-sm-7 > .btn').first().click();
-    let isDesiredMonth = await page.getByText(Booking_Date).isVisible();
+    let isDesiredMonth = await page.getByText(Booking_Month).isVisible();
     while (!isDesiredMonth) {
         await page.getByRole('button', { name: 'Next' }).click();
-        isDesiredMonth = await page.getByText(Booking_Date).isVisible();
+        isDesiredMonth = await page.getByText(Booking_Month).isVisible();
     }
-    await page.dblclick('.rbc-month-view .rbc-day-bg >> nth=6');
+    // Its very difficult to get date on which has event. So selecting random date.
+    // Selecting exact date is achieved using API Tests
+    const dateCell = "(//div[@aria-label='Month View']/div[@class='rbc-month-row'])[3]/div[@class='rbc-row-bg']/div[@class='rbc-day-bg'][3]"
+    const dateCell_row_2_to_4 = replaceCharacterInString(dateCell, 62, (Math.floor(Math.random() * 4) + 2).toString());
+    const dateCell_final = replaceCharacterInString(dateCell_row_2_to_4, 115, (Math.floor(Math.random() * 7) + 1).toString());
+    console.log(dateCell_final);
+    await page.locator(dateCell_final).dblclick();
 });
 
 When('I select first room form the list of available rooms', async ({ page },) => {
@@ -60,3 +67,4 @@ When('I click today button I get current month calender', async ({ page },) => {
     const isTextVisible = await page.getByText(getDateAndYearRelativeToCurrentDate(0)).isVisible();
     expect(isTextVisible).toBeTruthy();
 });
+

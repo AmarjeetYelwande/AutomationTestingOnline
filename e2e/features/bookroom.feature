@@ -23,11 +23,11 @@ Feature: Book room
         When I click back button I get previous month calender
         When I click today button I get current month calender
     Scenario: Book room using calendar picker
-        When I select my desired "<Booking_Date>"
+        When I select my desired "<Booking_Month>"
         And I enter my "<FirstName>" "<LastName>" "<Email>" "<Phone>" on booking form
         And I click submit button
         Then I get "<Information_Message>" about my booking
         Examples:
-            | No | Description  | Booking_Date  | FirstName | LastName | Email           | Phone       | Information_Message                                  |
-            | 1  | Happy path 1 | December 2025 | Steve     | Smith    | steve@email.com | 07440000000 | Congratulations! Your booking has been confirmed for |
-            | 2  | Happy path 2 | March 2026    | Steve     | Smith    | steve@email.com | 07440000000 | Congratulations! Your booking has been confirmed for |
+            | No | Description  | Booking_Month | FirstName | LastName | Email           | Phone       | Information_Message                                  |
+            | 1  | Happy path 1 | March 2025    | Steve     | Smith    | steve@email.com | 07440000000 | Congratulations! Your booking has been confirmed for |
+            | 2  | Happy path 2 | June 2025     | Steve     | Smith    | steve@email.com | 07440000000 | Congratulations! Your booking has been confirmed for |
