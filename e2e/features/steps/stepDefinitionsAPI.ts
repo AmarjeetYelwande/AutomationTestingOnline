@@ -40,38 +40,38 @@ Then('The response for {string} matches with schema specified in the json file {
     response.close;
 });
 
-// Due to some reason when request is sent from playwright error 403 is returned.
-When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
-    Api_Endpoint: string, json: any) => {
-    console.log(Api_Endpoint);
-    console.log(json);
-    const postRequestData = createRequire(import.meta.url)("../data/" + json + ".json");
-    response = await request.post(Api_Endpoint, {
-        data: postRequestData
-    });
-    console.log(request);
-    console.log(response);
-});
-
-// Due to some reason when request is sent from playwright error 403 is returned.
-// So using alternate approach to send request using shell script. Axios abd fetch also not working.
+// // Due to some reason when request is sent from playwright error 403 is returned.
 // When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
 //     Api_Endpoint: string, json: any) => {
-//     const data = {
-//         "bookingdates": {
-//             "checkin": "2025-01-08",
-//             "checkout": "2025-01-09"
-//         },
-//         "depositpaid": false,
-//         "firstname": "Amarjeet",
-//         "lastname": "Yelwande",
-//         "roomid": 1,
-//         "email": "yelwande@yahoo.com",
-//         "phone": "07448302090"
-//     };
-
-//     //console.log(await executeShellScript(`pwd`))
-//     response = await executeShellScript('curl -d "{"bookingdates":{"checkin":"2025-01-08","checkout":"2025-01-09"},"depositpaid":false,"firstname":"Amarjeet","lastname":"Yelwande","roomid":1,"email":"yelwande@yahoo.com","phone":"07448302090"}"  -H "Content-Type: application/json" -X POST "https://automationintesting.online/booking"');
+//     console.log(Api_Endpoint);
+//     console.log(json);
+//     const postRequestData = createRequire(import.meta.url)("../data/" + json + ".json");
+//     response = await request.post(Api_Endpoint, {
+//         data: postRequestData
+//     });
+//     console.log(request);
 //     console.log(response);
 // });
+
+//Due to some reason when request is sent from playwright error 403 is returned.
+//So using alternate approach to send request using shell script. Axios and fetch also not working.
+When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
+    Api_Endpoint: string, json: object) => {
+    const data = {
+        "bookingdates": {
+            "checkin": "2025-01-08",
+            "checkout": "2025-01-09"
+        },
+        "depositpaid": false,
+        "firstname": "Amarjeet",
+        "lastname": "Yelwande",
+        "roomid": 1,
+        "email": "yelwande@yahoo.com",
+        "phone": "07448302090"
+    };
+
+    // Works with postman collection
+    response = await executeShellScript("newman run ./e2e/features/data/AutomationOnline.postman_collection.json  --reporters html,cli");
+    console.log(response);
+});
 

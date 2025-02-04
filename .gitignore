@@ -7,3 +7,4 @@ node_modules/
 /playwright/.cache/
 /cucumber-report
 /.features-gen
+newman/newman-run-report*
