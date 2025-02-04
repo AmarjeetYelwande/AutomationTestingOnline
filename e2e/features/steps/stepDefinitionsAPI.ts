@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { createRequire } from 'node:module';
 import { When, Then } from './fixtures';
 import { Ajv } from 'ajv';
+import { executeShellScript } from '../../utilities/executeShellScript';
 const ajv = new Ajv();
 let responseBody: any;
 let response: any;
@@ -19,42 +20,58 @@ Then('The response I get matches with expected response specified in the json fi
     response.close;
 });
 
-Then('The response for rooms matches with schema specified in the json file {string}', async ({ },
-    json: any) => {
+Then('The response for {string} matches with schema specified in the json file {string}', async ({ },
+    rooms: any, json: any,) => {
+    let firstElement: unknown;
     const roomSchema = createRequire(import.meta.url)("../data/" + json + ".json");
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
     responseBody = await response.json();
-    const firstElement = await responseBody.rooms[0];
+    if (json === 'roomSchema') {
+        expect(responseBody.rooms.length).toBeGreaterThan(0);
+        firstElement = await responseBody.rooms[0];
+    } else {
+        expect(responseBody.report.length).toBeGreaterThan(0);
+        firstElement = await responseBody.report[0];
+    }
     const isSchemaValid = ajv.validate(roomSchema, firstElement);
     if (!isSchemaValid) console.log(ajv.errors);
     expect(isSchemaValid).toBeTruthy();
     response.close;
 });
 
-When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
-    Api_Endpoint: string, json: any) => {
-    const postRequestData = createRequire(import.meta.url)("../data/" + json + ".json");
-    response = await request.post(Api_Endpoint, {
-        data: postRequestData
-    });
-});
-
-//Due to some reason when request is sent from playwright error 403 is returned.
-//So using alternate approach to send request using fetch
+// // Due to some reason when request is sent from playwright error 403 is returned.
 // When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
 //     Api_Endpoint: string, json: any) => {
-//     const endpoint = "https://automationintesting.online" + Api_Endpoint;
+//     console.log(Api_Endpoint);
+//     console.log(json);
 //     const postRequestData = createRequire(import.meta.url)("../data/" + json + ".json");
-//     response = await fetch(endpoint, {
-//         method: "POST",
-//         body: JSON.stringify(postRequestData),
-//         headers: {
-//             "Content-type": "application/json; charset=UTF-8",
-//         },
+//     response = await request.post(Api_Endpoint, {
+//         data: postRequestData
 //     });
-//     //const data1 = await response.js
-//     // on();
-//     console.log(response.status);
+//     console.log(request);
+//     console.log(response);
 // });
+
+//Due to some reason when request is sent from playwright error 403 is returned.
+//So using alternate approach to send request using shell script. Axios and fetch also not working.
+When('I send a POST request to {string} API with data from the json file {string}', async ({ request },
+    Api_Endpoint: string, json: object) => {
+    const data = {
+        "bookingdates": {
+            "checkin": "2025-01-08",
+            "checkout": "2025-01-09"
+        },
+        "depositpaid": false,
+        "firstname": "Amarjeet",
+        "lastname": "Yelwande",
+        "roomid": 1,
+        "email": "yelwande@yahoo.com",
+        "phone": "07448302090"
+    };
+
+    // Works with postman collection
+    response = await executeShellScript("newman run ./e2e/features/data/AutomationOnline.postman_collection.json  --reporters html,cli");
+    console.log(response);
+});
 

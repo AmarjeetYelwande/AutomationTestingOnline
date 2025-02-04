@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "5a802e3c-c5cc-40e0-8d55-790bc9e386a5",
+		"name": "AutomationOnline",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5137642"
+	},
+	"item": [
+		{
+			"name": "https://automationintesting.online/booking/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.expect(pm.response.code).to.be.oneOf([409]);\r",
+							"console.log(\"response code is \" + pm.response.code);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-02-08\",\r\n        \"checkout\": \"2024-02-09\"\r\n    },\r\n    \"depositpaid\": false,\r\n    \"firstname\": \"Steve\",\r\n    \"lastname\": \"Smith\",\r\n    \"roomid\": 1,\r\n    \"email\": \"steve@email.com\",\r\n    \"phone\": \"07440000000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://automationintesting.online/booking/",
+					"protocol": "https",
+					"host": [
+						"automationintesting",
+						"online"
+					],
+					"path": [
+						"booking",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
